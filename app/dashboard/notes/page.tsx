@@ -100,13 +100,13 @@ export default function NotesPage() {
   }
 
   return (
-    <div className="p-8 h-full">
+    <div className="p-8 h-full flex flex-col">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-[var(--neu-text)]">Catatan</h1>
         <p className="text-[var(--neu-text-muted)] mt-1">Kelola pengetahuan & ide Anda</p>
       </div>
 
-      <div className="grid grid-cols-12 gap-6 h-[calc(100vh-200px)]">
+      <div className="grid grid-cols-12 gap-6 flex-1 min-h-0">
         <div className="col-span-4 flex flex-col neu-card">
           <div className="p-4 space-y-3">
             <button

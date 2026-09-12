@@ -66,11 +66,13 @@ export default function AIPage() {
     }
 
     try {
-      // Call AI API (ponytail: real AI integration - add when budget allows)
       const response = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({
+          message: userMessage,
+          history: messages.map(({ role, content }) => ({ role, content })),
+        }),
       })
 
       const { reply } = await response.json()
@@ -116,7 +118,7 @@ export default function AIPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-full min-h-0 flex flex-col">
       <div className="p-6 neu-raised-sm">
         <h1 className="text-3xl font-bold text-[var(--neu-text)]">AI Assistant</h1>
         <p className="text-[var(--neu-text-muted)] mt-1">Tanya apa saja tentang data Anda</p>
