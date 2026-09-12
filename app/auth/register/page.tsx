@@ -4,12 +4,24 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
+const ERROR_ID: Record<string, string> = {
+  'Invalid login credentials': 'Email atau password salah.',
+  'Email not confirmed': 'Email belum dikonfirmasi. Cek kotak masuk Anda.',
+  'User already registered': 'Email ini sudah terdaftar. Silakan masuk.',
+  'Password should be at least 6 characters': 'Password minimal 6 karakter.',
+}
+
+function pesanError(msg: string) {
+  return ERROR_ID[msg] ?? msg
+}
+
 export default function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [sukses, setSukses] = useState('')
   const router = useRouter()
   const supabase = createClient()
 
@@ -18,23 +30,35 @@ export default function RegisterPage() {
     setLoading(true)
     setError('')
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
           full_name: fullName,
         },
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
     })
 
     if (error) {
-      setError(error.message)
+      setError(pesanError(error.message))
       setLoading(false)
-    } else {
-      router.push('/dashboard')
-      router.refresh()
+      return
     }
+
+    // Confirmation email is on (Supabase default), so signUp returns no session.
+    // Pushing to /dashboard here just bounces off the middleware back to login.
+    if (!data.session) {
+      setSukses(
+        `Akun dibuat. Kami mengirim tautan konfirmasi ke ${email}. Buka tautan itu dulu, baru masuk.`
+      )
+      setLoading(false)
+      return
+    }
+
+    router.push('/dashboard')
+    router.refresh()
   }
 
   return (
@@ -52,6 +76,11 @@ export default function RegisterPage() {
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
               {error}
+            </div>
+          )}
+          {sukses && (
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm">
+              {sukses}
             </div>
           )}
           <div className="space-y-4">

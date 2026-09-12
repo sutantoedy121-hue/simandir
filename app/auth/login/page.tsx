@@ -4,6 +4,17 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
+const ERROR_ID: Record<string, string> = {
+  'Invalid login credentials': 'Email atau password salah.',
+  'Email not confirmed':
+    'Email belum dikonfirmasi. Cek kotak masuk Anda, termasuk folder spam.',
+  'User already registered': 'Email ini sudah terdaftar. Silakan masuk.',
+}
+
+function pesanError(msg: string) {
+  return ERROR_ID[msg] ?? msg
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -23,7 +34,7 @@ export default function LoginPage() {
     })
 
     if (error) {
-      setError(error.message)
+      setError(pesanError(error.message))
       setLoading(false)
     } else {
       router.push('/dashboard')
@@ -32,13 +43,16 @@ export default function LoginPage() {
   }
 
   const handleGoogleLogin = async () => {
+    setError('')
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     })
-    if (error) setError(error.message)
+    // Ponytail: Google OAuth is not enabled in the Supabase project yet, so this
+    // call returns a redirect to an error page. Fail loudly instead of silently.
+    if (error) setError(pesanError(error.message))
   }
 
   return (
