@@ -43,13 +43,13 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
-      <div className="p-6 border-b border-gray-200">
-        <h2 className="text-xl font-bold text-gray-900">SMD</h2>
-        <p className="text-xs text-gray-500 mt-1">Sistem Manajemen Diri</p>
+    <div className="w-64 flex flex-col">
+      <div className="p-6 pb-4">
+        <h2 className="text-xl font-bold text-[var(--neu-text)]">SMD</h2>
+        <p className="text-xs text-[var(--neu-text-muted)] mt-1">Sistem Manajemen Diri</p>
       </div>
 
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-3 py-2 space-y-1 overflow-y-auto">
         {navigation.map((item) => {
           const isActive = pathname === item.href
           const Icon = item.icon
@@ -57,10 +57,8 @@ export default function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                isActive
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+              className={`neu-nav-item flex items-center gap-3 px-3 py-2 text-sm font-medium ${
+                isActive ? 'active' : ''
               }`}
             >
               <Icon className="w-5 h-5" />
@@ -70,10 +68,10 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-3">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg w-full transition-colors"
+          className="neu-nav-item flex items-center gap-3 px-3 py-2 text-sm font-medium w-full"
         >
           <LogOutIcon className="w-5 h-5" />
           Keluar

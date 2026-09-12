@@ -56,25 +56,25 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="neu-card max-w-md w-full space-y-8 p-8">
         <div>
-          <h2 className="text-center text-3xl font-bold text-gray-900">
+          <h2 className="text-center text-3xl font-bold text-[var(--neu-text)]">
             Sistem Manajemen Diri
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-[var(--neu-text-muted)]">
             Masuk ke akun Anda
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+            <div className="neu-alert-error px-4 py-3 text-sm">
               {error}
             </div>
           )}
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-[var(--neu-text)]">
                 Email
               </label>
               <input
@@ -82,13 +82,13 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="neu-input mt-1 block w-full px-4 py-3 text-sm"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-[var(--neu-text)]">
                 Password
               </label>
               <input
@@ -96,7 +96,7 @@ export default function LoginPage() {
                 name="password"
                 type="password"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="neu-input mt-1 block w-full px-4 py-3 text-sm"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -107,7 +107,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+              className="neu-button w-full flex justify-center py-3 px-4 text-sm font-medium"
             >
               {loading ? 'Loading...' : 'Masuk'}
             </button>
@@ -115,17 +115,17 @@ export default function LoginPage() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+              <div className="w-full border-t border-[var(--neu-shadow-dark)]"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Atau</span>
+              <span className="px-2 text-[var(--neu-text-muted)]">Atau</span>
             </div>
           </div>
 
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="w-full flex justify-center items-center gap-2 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="neu-button-secondary w-full flex justify-center items-center gap-2 py-3 px-4 text-sm font-medium"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -136,9 +136,9 @@ export default function LoginPage() {
             Masuk dengan Google
           </button>
 
-          <p className="text-center text-sm text-gray-600">
+          <p className="text-center text-sm text-[var(--neu-text-muted)]">
             Belum punya akun?{' '}
-            <a href="/auth/register" className="font-medium text-blue-600 hover:text-blue-500">
+            <a href="/auth/register" className="font-medium text-[var(--neu-accent)] hover:text-[var(--neu-accent-hover)]">
               Daftar
             </a>
           </p>

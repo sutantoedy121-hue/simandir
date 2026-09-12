@@ -62,30 +62,30 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="neu-card max-w-md w-full space-y-8 p-8">
         <div>
-          <h2 className="text-center text-3xl font-bold text-gray-900">
+          <h2 className="text-center text-3xl font-bold text-[var(--neu-text)]">
             Buat Akun Baru
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center text-sm text-[var(--neu-text-muted)]">
             Mulai kelola hidup Anda
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleRegister}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+            <div className="neu-alert-error px-4 py-3 text-sm">
               {error}
             </div>
           )}
           {sukses && (
-            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded text-sm">
+            <div className="neu-alert-success px-4 py-3 text-sm">
               {sukses}
             </div>
           )}
           <div className="space-y-4">
             <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="fullName" className="block text-sm font-medium text-[var(--neu-text)]">
                 Nama Lengkap
               </label>
               <input
@@ -93,13 +93,13 @@ export default function RegisterPage() {
                 name="fullName"
                 type="text"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="neu-input mt-1 block w-full px-4 py-3 text-sm"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-[var(--neu-text)]">
                 Email
               </label>
               <input
@@ -107,13 +107,13 @@ export default function RegisterPage() {
                 name="email"
                 type="email"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="neu-input mt-1 block w-full px-4 py-3 text-sm"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-[var(--neu-text)]">
                 Password
               </label>
               <input
@@ -122,11 +122,11 @@ export default function RegisterPage() {
                 type="password"
                 required
                 minLength={6}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="neu-input mt-1 block w-full px-4 py-3 text-sm"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <p className="mt-1 text-xs text-gray-500">Minimal 6 karakter</p>
+              <p className="mt-1 text-xs text-[var(--neu-text-muted)]">Minimal 6 karakter</p>
             </div>
           </div>
 
@@ -134,15 +134,15 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+              className="neu-button w-full flex justify-center py-3 px-4 text-sm font-medium"
             >
               {loading ? 'Loading...' : 'Daftar'}
             </button>
           </div>
 
-          <p className="text-center text-sm text-gray-600">
+          <p className="text-center text-sm text-[var(--neu-text-muted)]">
             Sudah punya akun?{' '}
-            <a href="/auth/login" className="font-medium text-blue-600 hover:text-blue-500">
+            <a href="/auth/login" className="font-medium text-[var(--neu-accent)] hover:text-[var(--neu-accent-hover)]">
               Masuk
             </a>
           </p>

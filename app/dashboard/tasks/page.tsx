@@ -95,10 +95,10 @@ export default function TasksPage() {
 
   const getPriorityLabel = (priority: number) => {
     switch (priority) {
-      case 1: return { text: 'Urgent & Important', color: 'bg-red-100 text-red-800' }
-      case 2: return { text: 'Important', color: 'bg-yellow-100 text-yellow-800' }
-      case 3: return { text: 'Urgent', color: 'bg-orange-100 text-orange-800' }
-      default: return { text: 'Low Priority', color: 'bg-gray-100 text-gray-800' }
+      case 1: return { text: 'Urgent & Important', color: 'neu-badge text-[var(--neu-danger-text)]' }
+      case 2: return { text: 'Important', color: 'neu-badge text-[var(--neu-warning-text)]' }
+      case 3: return { text: 'Urgent', color: 'neu-badge text-[var(--neu-warning-text)]' }
+      default: return { text: 'Low Priority', color: 'neu-badge text-[var(--neu-text-muted)]' }
     }
   }
 
@@ -109,12 +109,12 @@ export default function TasksPage() {
     <div className="p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Manajemen Tugas</h1>
-          <p className="text-gray-600 mt-1">Kelola tugas dengan Eisenhower Matrix</p>
+          <h1 className="text-3xl font-bold text-[var(--neu-text)]">Manajemen Tugas</h1>
+          <p className="text-[var(--neu-text-muted)] mt-1">Kelola tugas dengan Eisenhower Matrix</p>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="flex items-center gap-2 px-4 py-2 neu-button"
         >
           <PlusIcon className="w-5 h-5" />
           Tugas Baru
@@ -122,30 +122,30 @@ export default function TasksPage() {
       </div>
 
       {showForm && (
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-6 mb-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Buat Tugas Baru</h3>
+        <div className="neu-card p-6 mb-6">
+          <h3 className="text-lg font-bold text-[var(--neu-text)] mb-4">Buat Tugas Baru</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Judul</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Judul</label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Deskripsi</label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
                 rows={3}
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">
                   Urgency (1-5)
                 </label>
                 <input
@@ -154,11 +154,11 @@ export default function TasksPage() {
                   max="5"
                   value={formData.urgency}
                   onChange={(e) => setFormData({ ...formData, urgency: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">
                   Importance (1-5)
                 </label>
                 <input
@@ -167,29 +167,29 @@ export default function TasksPage() {
                   max="5"
                   value={formData.importance}
                   onChange={(e) => setFormData({ ...formData, importance: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Deadline</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Deadline</label>
               <input
                 type="datetime-local"
                 value={formData.deadline}
                 onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
               />
             </div>
             <div className="flex gap-3">
               <button
                 onClick={createTask}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 neu-button"
               >
                 Simpan
               </button>
               <button
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                className="px-4 py-2 neu-button-secondary"
               >
                 Batal
               </button>
@@ -199,34 +199,34 @@ export default function TasksPage() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow border border-gray-200">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900">To Do ({todoTasks.length})</h2>
+        <div className="neu-card">
+          <div className="p-6">
+            <h2 className="text-xl font-bold text-[var(--neu-text)]">To Do ({todoTasks.length})</h2>
           </div>
-          <div className="divide-y divide-gray-200">
+          <div className="space-y-3 pb-3">
             {todoTasks.length === 0 ? (
-              <div className="p-6 text-center text-gray-500">Tidak ada tugas</div>
+              <div className="p-6 text-center text-[var(--neu-text-muted)]">Tidak ada tugas</div>
             ) : (
               todoTasks.map((task) => {
                 const priorityLabel = getPriorityLabel(task.priority)
                 return (
-                  <div key={task.id} className="p-4 hover:bg-gray-50">
+                  <div key={task.id} className="neu-raised-sm p-4">
                     <div className="flex items-start gap-3">
                       <button
                         onClick={() => toggleTask(task)}
-                        className="mt-1 w-5 h-5 border-2 border-gray-300 rounded hover:border-blue-600 flex-shrink-0"
+                        className="mt-1 neu-inset w-5 h-5 flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-medium text-gray-900">{task.title}</h3>
+                        <h3 className="font-medium text-[var(--neu-text)]">{task.title}</h3>
                         {task.description && (
-                          <p className="text-sm text-gray-600 mt-1">{task.description}</p>
+                          <p className="text-sm text-[var(--neu-text-muted)] mt-1">{task.description}</p>
                         )}
                         <div className="flex items-center gap-2 mt-2">
                           <span className={`text-xs px-2 py-1 rounded ${priorityLabel.color}`}>
                             {priorityLabel.text}
                           </span>
                           {task.deadline && (
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-[var(--neu-text-muted)]">
                               Due: {format(new Date(task.deadline), 'dd/MM/yyyy HH:mm')}
                             </span>
                           )}
@@ -234,7 +234,7 @@ export default function TasksPage() {
                       </div>
                       <button
                         onClick={() => deleteTask(task.id)}
-                        className="text-red-600 hover:text-red-800 flex-shrink-0"
+                        className="text-[var(--neu-danger)] hover:text-[var(--neu-danger-text)] flex-shrink-0"
                       >
                         <TrashIcon className="w-5 h-5" />
                       </button>
@@ -246,34 +246,34 @@ export default function TasksPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow border border-gray-200">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900">Done ({doneTasks.length})</h2>
+        <div className="neu-card">
+          <div className="p-6">
+            <h2 className="text-xl font-bold text-[var(--neu-text)]">Done ({doneTasks.length})</h2>
           </div>
-          <div className="divide-y divide-gray-200">
+          <div className="space-y-3 pb-3">
             {doneTasks.length === 0 ? (
-              <div className="p-6 text-center text-gray-500">Belum ada tugas selesai</div>
+              <div className="p-6 text-center text-[var(--neu-text-muted)]">Belum ada tugas selesai</div>
             ) : (
               doneTasks.map((task) => (
-                <div key={task.id} className="p-4 hover:bg-gray-50">
+                <div key={task.id} className="neu-raised-sm p-4">
                   <div className="flex items-start gap-3">
                     <button
                       onClick={() => toggleTask(task)}
-                      className="mt-1 w-5 h-5 bg-green-600 rounded flex items-center justify-center flex-shrink-0"
+                      className="mt-1 w-5 h-5 bg-[var(--neu-success)] rounded flex items-center justify-center flex-shrink-0"
                     >
                       <CheckIcon className="w-4 h-4 text-white" />
                     </button>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-500 line-through">{task.title}</h3>
+                      <h3 className="font-medium text-[var(--neu-text-muted)] line-through">{task.title}</h3>
                       {task.completed_at && (
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-[var(--neu-text-muted)] mt-1">
                           Selesai: {format(new Date(task.completed_at), 'dd/MM/yyyy HH:mm')}
                         </p>
                       )}
                     </div>
                     <button
                       onClick={() => deleteTask(task.id)}
-                      className="text-red-600 hover:text-red-800 flex-shrink-0"
+                      className="text-[var(--neu-danger)] hover:text-[var(--neu-danger-text)] flex-shrink-0"
                     >
                       <TrashIcon className="w-5 h-5" />
                     </button>

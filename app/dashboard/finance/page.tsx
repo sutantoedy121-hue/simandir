@@ -127,12 +127,12 @@ export default function FinancePage() {
     <div className="p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Manajemen Keuangan</h1>
-          <p className="text-gray-600 mt-1">Lacak pemasukan & pengeluaran Anda</p>
+          <h1 className="text-3xl font-bold text-[var(--neu-text)]">Manajemen Keuangan</h1>
+          <p className="text-[var(--neu-text-muted)] mt-1">Lacak pemasukan & pengeluaran Anda</p>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="flex items-center gap-2 px-4 py-2 neu-button"
         >
           <PlusIcon className="w-5 h-5" />
           Transaksi Baru
@@ -140,101 +140,101 @@ export default function FinancePage() {
       </div>
 
       {alert && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex items-start gap-3">
-          <AlertTriangleIcon className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-          <p className="text-sm text-red-800">{alert}</p>
+        <div className="neu-alert-error p-4 mb-6 flex items-start gap-3">
+          <AlertTriangleIcon className="w-5 h-5 text-[var(--neu-danger)] flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-[var(--neu-danger-text)]">{alert}</p>
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-          <p className="text-sm text-gray-600">Saldo</p>
-          <p className={`text-2xl font-bold mt-1 ${stats.balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+        <div className="neu-card p-4">
+          <p className="text-sm text-[var(--neu-text-muted)]">Saldo</p>
+          <p className={`text-2xl font-bold mt-1 ${stats.balance >= 0 ? 'text-[var(--neu-success)]' : 'text-[var(--neu-danger)]'}`}>
             Rp {stats.balance.toLocaleString()}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-          <p className="text-sm text-gray-600">Hari Ini</p>
-          <p className="text-2xl font-bold text-red-600 mt-1">
+        <div className="neu-card p-4">
+          <p className="text-sm text-[var(--neu-text-muted)]">Hari Ini</p>
+          <p className="text-2xl font-bold text-[var(--neu-danger)] mt-1">
             Rp {stats.todayExpense.toLocaleString()}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-          <p className="text-sm text-gray-600">Minggu Ini</p>
-          <p className="text-2xl font-bold text-red-600 mt-1">
+        <div className="neu-card p-4">
+          <p className="text-sm text-[var(--neu-text-muted)]">Minggu Ini</p>
+          <p className="text-2xl font-bold text-[var(--neu-danger)] mt-1">
             Rp {stats.weekExpense.toLocaleString()}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-          <p className="text-sm text-gray-600">Bulan Ini (Keluar)</p>
-          <p className="text-2xl font-bold text-red-600 mt-1">
+        <div className="neu-card p-4">
+          <p className="text-sm text-[var(--neu-text-muted)]">Bulan Ini (Keluar)</p>
+          <p className="text-2xl font-bold text-[var(--neu-danger)] mt-1">
             Rp {stats.monthExpense.toLocaleString()}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-          <p className="text-sm text-gray-600">Bulan Ini (Masuk)</p>
-          <p className="text-2xl font-bold text-green-600 mt-1">
+        <div className="neu-card p-4">
+          <p className="text-sm text-[var(--neu-text-muted)]">Bulan Ini (Masuk)</p>
+          <p className="text-2xl font-bold text-[var(--neu-success)] mt-1">
             Rp {stats.monthIncome.toLocaleString()}
           </p>
         </div>
       </div>
 
       {showForm && (
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-6 mb-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Transaksi Baru</h3>
+        <div className="neu-card p-6 mb-6">
+          <h3 className="text-lg font-bold text-[var(--neu-text)] mb-4">Transaksi Baru</h3>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Tipe</label>
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Tipe</label>
                 <select
                   value={formData.type}
                   onChange={(e) => setFormData({ ...formData, type: e.target.value as 'income' | 'expense' })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                 >
                   <option value="expense">Pengeluaran</option>
                   <option value="income">Pemasukan</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Jumlah</label>
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Jumlah</label>
                 <input
                   type="number"
                   value={formData.amount}
                   onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                   placeholder="0"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Kategori</label>
               <input
                 type="text"
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
                 placeholder="Contoh: Makanan, Transport, Gaji"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Deskripsi</label>
               <input
                 type="text"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
               />
             </div>
             <div className="flex gap-3">
               <button
                 onClick={createTransaction}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 neu-button"
               >
                 Simpan
               </button>
               <button
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                className="px-4 py-2 neu-button-secondary"
               >
                 Batal
               </button>
@@ -243,36 +243,36 @@ export default function FinancePage() {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-xl font-bold text-gray-900">Riwayat Transaksi</h2>
+      <div className="neu-card">
+        <div className="p-6">
+          <h2 className="text-xl font-bold text-[var(--neu-text)]">Riwayat Transaksi</h2>
         </div>
-        <div className="divide-y divide-gray-200">
+        <div className="space-y-3 pb-3">
           {transactions.length === 0 ? (
-            <div className="p-6 text-center text-gray-500">Belum ada transaksi</div>
+            <div className="p-6 text-center text-[var(--neu-text-muted)]">Belum ada transaksi</div>
           ) : (
             transactions.map((transaction) => (
-              <div key={transaction.id} className="p-4 hover:bg-gray-50">
+              <div key={transaction.id} className="neu-raised-sm p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">
-                    <div className={`mt-1 p-2 rounded-lg ${transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'}`}>
+                    <div className={`mt-1 p-2 rounded-lg ${transaction.type === 'income' ? 'bg-[var(--neu-success)]/20' : 'bg-[var(--neu-danger)]/20'}`}>
                       {transaction.type === 'income' ? (
-                        <TrendingUpIcon className="w-5 h-5 text-green-600" />
+                        <TrendingUpIcon className="w-5 h-5 text-[var(--neu-success)]" />
                       ) : (
-                        <TrendingDownIcon className="w-5 h-5 text-red-600" />
+                        <TrendingDownIcon className="w-5 h-5 text-[var(--neu-danger)]" />
                       )}
                     </div>
                     <div>
-                      <h3 className="font-medium text-gray-900">{transaction.category}</h3>
+                      <h3 className="font-medium text-[var(--neu-text)]">{transaction.category}</h3>
                       {transaction.description && (
-                        <p className="text-sm text-gray-600">{transaction.description}</p>
+                        <p className="text-sm text-[var(--neu-text-muted)]">{transaction.description}</p>
                       )}
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs text-[var(--neu-text-muted)] mt-1">
                         {format(new Date(transaction.transaction_date), 'dd/MM/yyyy HH:mm')}
                       </p>
                     </div>
                   </div>
-                  <p className={`text-lg font-bold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                  <p className={`text-lg font-bold ${transaction.type === 'income' ? 'text-[var(--neu-success)]' : 'text-[var(--neu-danger)]'}`}>
                     {transaction.type === 'income' ? '+' : '-'}Rp {transaction.amount.toLocaleString()}
                   </p>
                 </div>

@@ -90,46 +90,46 @@ export default function JournalPage() {
   }
 
   const moods = [
-    { value: 'great', label: '😊 Luar Biasa', color: 'text-green-600' },
-    { value: 'good', label: '🙂 Baik', color: 'text-blue-600' },
+    { value: 'great', label: '😊 Luar Biasa', color: 'text-[var(--neu-success)]' },
+    { value: 'good', label: '🙂 Baik', color: 'text-[var(--neu-accent)]' },
     { value: 'okay', label: '😐 Biasa', color: 'text-yellow-600' },
-    { value: 'bad', label: '😞 Buruk', color: 'text-orange-600' },
-    { value: 'terrible', label: '😢 Sangat Buruk', color: 'text-red-600' },
+    { value: 'bad', label: '😞 Buruk', color: 'text-[var(--neu-warning-text)]' },
+    { value: 'terrible', label: '😢 Sangat Buruk', color: 'text-[var(--neu-danger)]' },
   ]
 
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Jurnal Harian</h1>
-        <p className="text-gray-600 mt-1">Refleksi & catat perjalanan Anda</p>
+        <h1 className="text-3xl font-bold text-[var(--neu-text)]">Jurnal Harian</h1>
+        <p className="text-[var(--neu-text-muted)] mt-1">Refleksi & catat perjalanan Anda</p>
       </div>
 
       <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-3 bg-white rounded-lg shadow border border-gray-200 p-4">
-          <h3 className="font-bold text-gray-900 mb-4">Tanggal</h3>
+        <div className="col-span-3 neu-card p-4">
+          <h3 className="font-bold text-[var(--neu-text)] mb-4">Tanggal</h3>
           <input
             type="date"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 neu-input"
           />
 
           <div className="mt-6">
-            <h3 className="font-bold text-gray-900 mb-3">Riwayat</h3>
+            <h3 className="font-bold text-[var(--neu-text)] mb-3">Riwayat</h3>
             <div className="space-y-2 max-h-96 overflow-y-auto">
               {entries.map((entry) => (
                 <button
                   key={entry.id}
                   onClick={() => setSelectedDate(entry.entry_date)}
-                  className={`w-full text-left p-3 rounded-lg hover:bg-gray-50 ${
-                    entry.entry_date === selectedDate ? 'bg-blue-50 border border-blue-200' : 'border border-gray-200'
+                  className={`w-full text-left neu-raised-sm p-3 ${
+                    entry.entry_date === selectedDate ? 'neu-inset' : ''
                   }`}
                 >
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium text-[var(--neu-text)]">
                     {format(new Date(entry.entry_date), 'dd MMM yyyy')}
                   </p>
                   {entry.title && (
-                    <p className="text-xs text-gray-600 mt-1 truncate">{entry.title}</p>
+                    <p className="text-xs text-[var(--neu-text-muted)] mt-1 truncate">{entry.title}</p>
                   )}
                 </button>
               ))}
@@ -137,15 +137,15 @@ export default function JournalPage() {
           </div>
         </div>
 
-        <div className="col-span-9 bg-white rounded-lg shadow border border-gray-200 p-6">
+        <div className="col-span-9 neu-card p-6">
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-2xl font-bold text-[var(--neu-text)]">
               {format(new Date(selectedDate), 'dd MMMM yyyy')}
             </h2>
             {!isEditing && currentEntry && (
               <button
                 onClick={() => setIsEditing(true)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 neu-button"
               >
                 Edit
               </button>
@@ -155,18 +155,18 @@ export default function JournalPage() {
           {isEditing ? (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Judul (Opsional)</label>
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Judul (Opsional)</label>
                 <input
                   type="text"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                   placeholder="Judul jurnal hari ini"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Mood</label>
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Mood</label>
                 <div className="grid grid-cols-5 gap-2">
                   {moods.map((mood) => (
                     <button
@@ -174,8 +174,8 @@ export default function JournalPage() {
                       onClick={() => setFormData({ ...formData, mood: mood.value })}
                       className={`p-3 border-2 rounded-lg text-center transition-colors ${
                         formData.mood === mood.value
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-300 hover:border-gray-400'
+                          ? 'neu-inset'
+                          : 'neu-raised-sm'
                       }`}
                     >
                       <span className="text-2xl">{mood.label.split(' ')[0]}</span>
@@ -186,11 +186,11 @@ export default function JournalPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Isi Jurnal</label>
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Isi Jurnal</label>
                 <textarea
                   value={formData.content}
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-3 py-2 neu-input"
                   rows={15}
                   placeholder="Tuliskan refleksi Anda hari ini..."
                 />
@@ -199,7 +199,7 @@ export default function JournalPage() {
               <div className="flex gap-3">
                 <button
                   onClick={saveEntry}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  className="px-4 py-2 neu-button"
                 >
                   Simpan
                 </button>
@@ -209,7 +209,7 @@ export default function JournalPage() {
                       setIsEditing(false)
                       loadEntryForDate(selectedDate)
                     }}
-                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                    className="px-4 py-2 neu-button-secondary"
                   >
                     Batal
                   </button>
@@ -219,26 +219,26 @@ export default function JournalPage() {
           ) : currentEntry ? (
             <div>
               {currentEntry.title && (
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{currentEntry.title}</h3>
+                <h3 className="text-xl font-bold text-[var(--neu-text)] mb-4">{currentEntry.title}</h3>
               )}
               {currentEntry.mood && (
                 <div className="mb-4">
-                  <span className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-lg">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 neu-inset">
                     <span className="text-xl">
                       {moods.find((m) => m.value === currentEntry.mood)?.label.split(' ')[0]}
                     </span>
-                    <span className="text-sm font-medium text-gray-700">
+                    <span className="text-sm font-medium text-[var(--neu-text)]">
                       {moods.find((m) => m.value === currentEntry.mood)?.label.split(' ')[1]}
                     </span>
                   </span>
                 </div>
               )}
               <div className="prose max-w-none">
-                <p className="whitespace-pre-wrap text-gray-700">{currentEntry.content}</p>
+                <p className="whitespace-pre-wrap text-[var(--neu-text)]">{currentEntry.content}</p>
               </div>
             </div>
           ) : (
-            <div className="text-center text-gray-500 py-12">
+            <div className="text-center text-[var(--neu-text-muted)] py-12">
               Belum ada jurnal untuk tanggal ini
             </div>
           )}

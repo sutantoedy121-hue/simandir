@@ -153,12 +153,12 @@ export default function GoalsPage() {
     <div className="p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Target & Goals</h1>
-          <p className="text-gray-600 mt-1">Tetapkan dan capai target jangka panjang Anda</p>
+          <h1 className="text-3xl font-bold text-[var(--neu-text)]">Target & Goals</h1>
+          <p className="text-[var(--neu-text-muted)] mt-1">Tetapkan dan capai target jangka panjang Anda</p>
         </div>
         <button
           onClick={() => setShowGoalForm(!showGoalForm)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="flex items-center gap-2 px-4 py-2 neu-button"
         >
           <PlusIcon className="w-5 h-5" />
           Goal Baru
@@ -166,47 +166,47 @@ export default function GoalsPage() {
       </div>
 
       {showGoalForm && (
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-6 mb-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Buat Goal Baru</h3>
+        <div className="neu-card p-6 mb-6">
+          <h3 className="text-lg font-bold text-[var(--neu-text)] mb-4">Buat Goal Baru</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Judul</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Judul</label>
               <input
                 type="text"
                 value={goalForm.title}
                 onChange={(e) => setGoalForm({ ...goalForm, title: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
                 placeholder="Contoh: Lulus Sertifikasi AWS"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Deskripsi</label>
               <textarea
                 value={goalForm.description}
                 onChange={(e) => setGoalForm({ ...goalForm, description: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
                 rows={3}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Target Date</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Target Date</label>
               <input
                 type="date"
                 value={goalForm.target_date}
                 onChange={(e) => setGoalForm({ ...goalForm, target_date: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
               />
             </div>
             <div className="flex gap-3">
               <button
                 onClick={createGoal}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 neu-button"
               >
                 Simpan
               </button>
               <button
                 onClick={() => setShowGoalForm(false)}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                className="px-4 py-2 neu-button-secondary"
               >
                 Batal
               </button>
@@ -217,42 +217,42 @@ export default function GoalsPage() {
 
       <div className="space-y-6">
         <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Active Goals ({activeGoals.length})</h2>
+          <h2 className="text-xl font-bold text-[var(--neu-text)] mb-4">Active Goals ({activeGoals.length})</h2>
           <div className="space-y-4">
             {activeGoals.length === 0 ? (
-              <div className="bg-white rounded-lg shadow border border-gray-200 p-8 text-center text-gray-500">
+              <div className="neu-card p-8 text-center text-[var(--neu-text-muted)]">
                 Belum ada goal aktif
               </div>
             ) : (
               activeGoals.map((goal) => (
-                <div key={goal.id} className="bg-white rounded-lg shadow border border-gray-200 p-6">
+                <div key={goal.id} className="neu-card p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <TargetIcon className="w-5 h-5 text-blue-600" />
-                        <h3 className="text-lg font-bold text-gray-900">{goal.title}</h3>
+                        <TargetIcon className="w-5 h-5 text-[var(--neu-accent)]" />
+                        <h3 className="text-lg font-bold text-[var(--neu-text)]">{goal.title}</h3>
                       </div>
                       {goal.description && (
-                        <p className="text-sm text-gray-600 mt-2">{goal.description}</p>
+                        <p className="text-sm text-[var(--neu-text-muted)] mt-2">{goal.description}</p>
                       )}
                       {goal.target_date && (
-                        <p className="text-sm text-gray-500 mt-1">
+                        <p className="text-sm text-[var(--neu-text-muted)] mt-1">
                           Target: {format(new Date(goal.target_date), 'dd/MM/yyyy')}
                         </p>
                       )}
                     </div>
-                    <div className="flex items-center gap-2 bg-blue-100 px-3 py-1 rounded">
-                      <TrendingUpIcon className="w-4 h-4 text-blue-600" />
-                      <span className="text-sm font-bold text-blue-600">
+                    <div className="flex items-center gap-2 neu-badge">
+                      <TrendingUpIcon className="w-4 h-4 text-[var(--neu-accent)]" />
+                      <span className="text-sm font-bold text-[var(--neu-accent)]">
                         {goal.progress_percentage}%
                       </span>
                     </div>
                   </div>
 
                   <div className="mb-4">
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="neu-progress-track">
                       <div
-                        className="bg-blue-600 h-2 rounded-full transition-all"
+                        className="neu-progress-fill transition-all"
                         style={{ width: `${goal.progress_percentage}%` }}
                       />
                     </div>
@@ -260,42 +260,42 @@ export default function GoalsPage() {
 
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-medium text-gray-700">
+                      <h4 className="text-sm font-medium text-[var(--neu-text)]">
                         Milestones ({goal.milestones.filter((m) => m.completed).length}/{goal.milestones.length})
                       </h4>
                       <button
                         onClick={() => setShowMilestoneForm(showMilestoneForm === goal.id ? null : goal.id)}
-                        className="text-sm text-blue-600 hover:text-blue-700"
+                        className="text-sm text-[var(--neu-accent)] hover:text-[var(--neu-accent-hover)]"
                       >
                         + Tambah Milestone
                       </button>
                     </div>
 
                     {showMilestoneForm === goal.id && (
-                      <div className="bg-gray-50 rounded p-4 space-y-3">
+                      <div className="neu-card p-4 space-y-3">
                         <input
                           type="text"
                           value={milestoneForm.title}
                           onChange={(e) => setMilestoneForm({ ...milestoneForm, title: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 neu-input"
                           placeholder="Milestone title"
                         />
                         <input
                           type="date"
                           value={milestoneForm.target_date}
                           onChange={(e) => setMilestoneForm({ ...milestoneForm, target_date: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 neu-input"
                         />
                         <div className="flex gap-2">
                           <button
                             onClick={() => createMilestone(goal.id)}
-                            className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
+                            className="px-3 py-1 neu-button"
                           >
                             Simpan
                           </button>
                           <button
                             onClick={() => setShowMilestoneForm(null)}
-                            className="px-3 py-1 bg-gray-200 text-gray-700 text-sm rounded hover:bg-gray-300"
+                            className="px-3 py-1 neu-button-secondary"
                           >
                             Batal
                           </button>
@@ -306,14 +306,14 @@ export default function GoalsPage() {
                     {goal.milestones.map((milestone) => (
                       <div
                         key={milestone.id}
-                        className="flex items-start gap-3 p-3 bg-gray-50 rounded hover:bg-gray-100"
+                        className="flex items-start gap-3 neu-raised-sm p-3"
                       >
                         <button
                           onClick={() => toggleMilestone(milestone, goal.id)}
                           className={`mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 ${
                             milestone.completed
-                              ? 'bg-green-600 border-green-600'
-                              : 'border-gray-300 hover:border-blue-600'
+                              ? 'bg-[var(--neu-success)] border-[var(--neu-success)]'
+                              : 'neu-inset'
                           }`}
                         >
                           {milestone.completed && (
@@ -323,11 +323,11 @@ export default function GoalsPage() {
                           )}
                         </button>
                         <div className="flex-1 min-w-0">
-                          <p className={`text-sm font-medium ${milestone.completed ? 'line-through text-gray-500' : 'text-gray-900'}`}>
+                          <p className={`text-sm font-medium ${milestone.completed ? 'line-through text-[var(--neu-text-muted)]' : 'text-[var(--neu-text)]'}`}>
                             {milestone.title}
                           </p>
                           {milestone.target_date && (
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-[var(--neu-text-muted)] mt-1">
                               {format(new Date(milestone.target_date), 'dd/MM/yyyy')}
                             </p>
                           )}
@@ -343,14 +343,14 @@ export default function GoalsPage() {
 
         {completedGoals.length > 0 && (
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Completed Goals ({completedGoals.length})</h2>
+            <h2 className="text-xl font-bold text-[var(--neu-text)] mb-4">Completed Goals ({completedGoals.length})</h2>
             <div className="space-y-4">
               {completedGoals.map((goal) => (
-                <div key={goal.id} className="bg-green-50 rounded-lg border border-green-200 p-6">
+                <div key={goal.id} className="neu-card p-6">
                   <div className="flex items-center gap-2">
-                    <TargetIcon className="w-5 h-5 text-green-600" />
-                    <h3 className="text-lg font-bold text-green-900">{goal.title}</h3>
-                    <span className="ml-auto bg-green-600 text-white text-xs px-2 py-1 rounded">
+                    <TargetIcon className="w-5 h-5 text-[var(--neu-success)]" />
+                    <h3 className="text-lg font-bold text-[var(--neu-success-text)]">{goal.title}</h3>
+                    <span className="ml-auto bg-[var(--neu-success)] text-white text-xs px-2 py-1 rounded">
                       Completed
                     </span>
                   </div>

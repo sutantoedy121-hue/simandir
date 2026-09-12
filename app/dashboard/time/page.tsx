@@ -97,23 +97,23 @@ export default function TimePage() {
   return (
     <div className="p-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Manajemen Waktu</h1>
-        <p className="text-gray-600 mt-1">Lacak aktivitas Anda secara realtime</p>
+        <h1 className="text-3xl font-bold text-[var(--neu-text)]">Manajemen Waktu</h1>
+        <p className="text-[var(--neu-text-muted)] mt-1">Lacak aktivitas Anda secara realtime</p>
       </div>
 
       {activeActivity ? (
-        <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+        <div className="neu-card p-6 mb-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-green-600 font-medium">Sedang Berjalan</p>
-              <h3 className="text-xl font-bold text-green-900 mt-1">{activeActivity.title}</h3>
-              <p className="text-sm text-green-700 mt-1">
+              <p className="text-sm text-[var(--neu-success)] font-medium">Sedang Berjalan</p>
+              <h3 className="text-xl font-bold text-[var(--neu-success-text)] mt-1">{activeActivity.title}</h3>
+              <p className="text-sm text-[var(--neu-success-text)] mt-1">
                 Dimulai: {format(new Date(activeActivity.start_time), 'HH:mm')}
               </p>
             </div>
             <button
               onClick={stopActivity}
-              className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+              className="flex items-center gap-2 px-4 py-2 neu-button-danger"
             >
               <StopCircleIcon className="w-5 h-5" />
               Stop
@@ -121,11 +121,11 @@ export default function TimePage() {
           </div>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+        <div className="neu-card p-6 mb-6">
           {!showForm ? (
             <button
               onClick={() => setShowForm(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="flex items-center gap-2 px-4 py-2 neu-button"
             >
               <PlayIcon className="w-5 h-5" />
               Mulai Aktivitas Baru
@@ -133,31 +133,31 @@ export default function TimePage() {
           ) : (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">
                   Nama Aktivitas
                 </label>
                 <input
                   type="text"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                   placeholder="Contoh: Belajar TypeScript"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">
                   Kategori
                 </label>
                 <input
                   type="text"
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                   placeholder="Contoh: Education"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Tipe</label>
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Tipe</label>
                 <select
                   value={formData.type}
                   onChange={(e) =>
@@ -166,7 +166,7 @@ export default function TimePage() {
                       type: e.target.value as 'positive' | 'negative' | 'neutral',
                     })
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                 >
                   <option value="positive">Positif</option>
                   <option value="neutral">Netral</option>
@@ -176,13 +176,13 @@ export default function TimePage() {
               <div className="flex gap-3">
                 <button
                   onClick={startActivity}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  className="px-4 py-2 neu-button"
                 >
                   Mulai
                 </button>
                 <button
                   onClick={() => setShowForm(false)}
-                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                  className="px-4 py-2 neu-button-secondary"
                 >
                   Batal
                 </button>
@@ -192,31 +192,31 @@ export default function TimePage() {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-xl font-bold text-gray-900">Riwayat Aktivitas</h2>
+      <div className="neu-card">
+        <div className="p-6">
+          <h2 className="text-xl font-bold text-[var(--neu-text)]">Riwayat Aktivitas</h2>
         </div>
-        <div className="divide-y divide-gray-200">
+        <div className="space-y-3 pb-3">
           {activities.length === 0 ? (
-            <div className="p-6 text-center text-gray-500">
+            <div className="p-6 text-center text-[var(--neu-text-muted)]">
               Belum ada aktivitas. Mulai lacak waktu Anda!
             </div>
           ) : (
             activities.map((activity) => (
-              <div key={activity.id} className="p-4 hover:bg-gray-50">
+              <div key={activity.id} className="neu-raised-sm p-4">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-medium text-gray-900">{activity.title}</h3>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <h3 className="font-medium text-[var(--neu-text)]">{activity.title}</h3>
+                    <p className="text-sm text-[var(--neu-text-muted)] mt-1">
                       {activity.category} • {activity.type}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-[var(--neu-text-muted)]">
                       {format(new Date(activity.start_time), 'dd/MM/yyyy HH:mm')}
                       {activity.end_time && ` - ${format(new Date(activity.end_time), 'HH:mm')}`}
                     </p>
                   </div>
                   {activity.duration_minutes && (
-                    <span className="text-sm font-medium text-blue-600">
+                    <span className="text-sm font-medium text-[var(--neu-accent)]">
                       {Math.round(activity.duration_minutes)} menit
                     </span>
                   )}

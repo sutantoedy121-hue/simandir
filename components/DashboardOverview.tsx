@@ -66,7 +66,7 @@ export default function DashboardOverview() {
   }, [supabase])
 
   if (loading) {
-    return <div className="text-gray-600">Loading...</div>
+    return <div className="text-[var(--neu-text-muted)]">Loading...</div>
   }
 
   const cards = [
@@ -74,25 +74,25 @@ export default function DashboardOverview() {
       title: 'Aktivitas Hari Ini',
       value: stats.todayActivities,
       icon: CalendarIcon,
-      color: 'bg-blue-500',
+      color: 'text-blue-500',
     },
     {
       title: 'Tugas Pending',
       value: stats.pendingTasks,
       icon: CheckSquareIcon,
-      color: 'bg-green-500',
+      color: 'text-green-500',
     },
     {
       title: 'Pengeluaran Hari Ini',
       value: stats.todayExpenses,
       icon: DollarSignIcon,
-      color: 'bg-yellow-500',
+      color: 'text-yellow-600',
     },
     {
       title: 'Kebiasaan Aktif',
       value: stats.activeHabits,
       icon: TrendingUpIcon,
-      color: 'bg-purple-500',
+      color: 'text-purple-500',
     },
   ]
 
@@ -103,15 +103,15 @@ export default function DashboardOverview() {
         return (
           <div
             key={card.title}
-            className="bg-white rounded-lg shadow p-6 border border-gray-200"
+            className="neu-card p-6"
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">{card.title}</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{card.value}</p>
+            <div className="flex items-center justify-between gap-4">
+              <div className="min-w-0">
+                <p className="text-sm font-medium text-[var(--neu-text-muted)]">{card.title}</p>
+                <p className="text-3xl font-bold text-[var(--neu-text)] mt-2">{card.value}</p>
               </div>
-              <div className={`${card.color} p-3 rounded-lg`}>
-                <Icon className="w-6 h-6 text-white" />
+              <div className="neu-icon-circle">
+                <Icon className={`w-6 h-6 ${card.color}`} />
               </div>
             </div>
           </div>

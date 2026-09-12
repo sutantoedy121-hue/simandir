@@ -156,12 +156,12 @@ export default function HabitsPage() {
     <div className="p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Manajemen Kebiasaan</h1>
-          <p className="text-gray-600 mt-1">Bangun kebiasaan baik dengan streak tracking</p>
+          <h1 className="text-3xl font-bold text-[var(--neu-text)]">Manajemen Kebiasaan</h1>
+          <p className="text-[var(--neu-text-muted)] mt-1">Bangun kebiasaan baik dengan streak tracking</p>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="flex items-center gap-2 px-4 py-2 neu-button"
         >
           <PlusIcon className="w-5 h-5" />
           Kebiasaan Baru
@@ -169,35 +169,35 @@ export default function HabitsPage() {
       </div>
 
       {showForm && (
-        <div className="bg-white rounded-lg shadow border border-gray-200 p-6 mb-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Buat Kebiasaan Baru</h3>
+        <div className="neu-card p-6 mb-6">
+          <h3 className="text-lg font-bold text-[var(--neu-text)] mb-4">Buat Kebiasaan Baru</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Judul</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Judul</label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
                 placeholder="Contoh: Olahraga 30 menit"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+              <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Deskripsi</label>
               <input
                 type="text"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 neu-input"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Frekuensi</label>
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Frekuensi</label>
                 <select
                   value={formData.frequency}
                   onChange={(e) => setFormData({ ...formData, frequency: e.target.value as 'daily' | 'weekly' | 'custom' })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                 >
                   <option value="daily">Harian</option>
                   <option value="weekly">Mingguan</option>
@@ -205,26 +205,26 @@ export default function HabitsPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Target Count</label>
+                <label className="block text-sm font-medium text-[var(--neu-text)] mb-1">Target Count</label>
                 <input
                   type="number"
                   min="1"
                   value={formData.target_count}
                   onChange={(e) => setFormData({ ...formData, target_count: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 neu-input"
                 />
               </div>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={createHabit}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 neu-button"
               >
                 Simpan
               </button>
               <button
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                className="px-4 py-2 neu-button-secondary"
               >
                 Batal
               </button>
@@ -235,26 +235,26 @@ export default function HabitsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {habits.length === 0 ? (
-          <div className="col-span-full bg-white rounded-lg shadow border border-gray-200 p-12 text-center">
-            <p className="text-gray-500">Belum ada kebiasaan. Mulai bangun kebiasaan baik!</p>
+          <div className="col-span-full neu-card p-12 text-center">
+            <p className="text-[var(--neu-text-muted)]">Belum ada kebiasaan. Mulai bangun kebiasaan baik!</p>
           </div>
         ) : (
           habits.map((habit) => (
             <div
               key={habit.id}
-              className="bg-white rounded-lg shadow border border-gray-200 p-6"
+              className="neu-card p-6"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <h3 className="font-bold text-gray-900 text-lg">{habit.title}</h3>
+                  <h3 className="font-bold text-[var(--neu-text)] text-lg">{habit.title}</h3>
                   {habit.description && (
-                    <p className="text-sm text-gray-600 mt-1">{habit.description}</p>
+                    <p className="text-sm text-[var(--neu-text-muted)] mt-1">{habit.description}</p>
                   )}
                 </div>
                 {habit.streak > 0 && (
-                  <div className="flex items-center gap-1 bg-orange-100 px-2 py-1 rounded">
-                    <FlameIcon className="w-4 h-4 text-orange-600" />
-                    <span className="text-sm font-bold text-orange-600">{habit.streak}</span>
+                  <div className="flex items-center gap-1 neu-badge text-[var(--neu-warning-text)]">
+                    <FlameIcon className="w-4 h-4 text-[var(--neu-warning-text)]" />
+                    <span className="text-sm font-bold text-[var(--neu-warning-text)]">{habit.streak}</span>
                   </div>
                 )}
               </div>
@@ -262,12 +262,12 @@ export default function HabitsPage() {
               <div className="space-y-3">
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-600">Completion Rate (30d)</span>
-                    <span className="font-medium text-gray-900">{habit.completionRate}%</span>
+                    <span className="text-[var(--neu-text-muted)]">Completion Rate (30d)</span>
+                    <span className="font-medium text-[var(--neu-text)]">{habit.completionRate}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="neu-progress-track">
                     <div
-                      className="bg-blue-600 h-2 rounded-full"
+                      className="neu-progress-fill"
                       style={{ width: `${habit.completionRate}%` }}
                     />
                   </div>
@@ -278,8 +278,8 @@ export default function HabitsPage() {
                   disabled={habit.todayCompleted}
                   className={`w-full flex items-center justify-center gap-2 py-2 rounded-lg font-medium transition-colors ${
                     habit.todayCompleted
-                      ? 'bg-green-100 text-green-700 cursor-not-allowed'
-                      : 'bg-blue-600 text-white hover:bg-blue-700'
+                      ? 'neu-inset text-[var(--neu-success-text)] cursor-not-allowed'
+                      : 'neu-button'
                   }`}
                 >
                   {habit.todayCompleted ? (

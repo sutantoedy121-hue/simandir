@@ -102,35 +102,35 @@ export default function NotesPage() {
   return (
     <div className="p-8 h-full">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Catatan</h1>
-        <p className="text-gray-600 mt-1">Kelola pengetahuan & ide Anda</p>
+        <h1 className="text-3xl font-bold text-[var(--neu-text)]">Catatan</h1>
+        <p className="text-[var(--neu-text-muted)] mt-1">Kelola pengetahuan & ide Anda</p>
       </div>
 
       <div className="grid grid-cols-12 gap-6 h-[calc(100vh-200px)]">
-        <div className="col-span-4 flex flex-col bg-white rounded-lg shadow border border-gray-200">
-          <div className="p-4 border-b border-gray-200 space-y-3">
+        <div className="col-span-4 flex flex-col neu-card">
+          <div className="p-4 space-y-3">
             <button
               onClick={createNote}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 neu-button"
             >
               <PlusIcon className="w-5 h-5" />
               Catatan Baru
             </button>
             <div className="relative">
-              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[var(--neu-text-muted)]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
                 placeholder="Cari catatan..."
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-3 py-2 neu-input"
               />
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto divide-y divide-gray-200">
+          <div className="flex-1 overflow-y-auto p-3 space-y-3">
             {notes.length === 0 ? (
-              <div className="p-6 text-center text-gray-500 text-sm">
+              <div className="p-6 text-center text-[var(--neu-text-muted)] text-sm">
                 Belum ada catatan
               </div>
             ) : (
@@ -138,15 +138,15 @@ export default function NotesPage() {
                 <div
                   key={note.id}
                   onClick={() => selectNote(note)}
-                  className={`p-4 cursor-pointer hover:bg-gray-50 ${
-                    selectedNote?.id === note.id ? 'bg-blue-50' : ''
+                  className={`neu-raised-sm p-4 cursor-pointer ${
+                    selectedNote?.id === note.id ? 'neu-inset' : ''
                   }`}
                 >
-                  <h3 className="font-medium text-gray-900 truncate">{note.title}</h3>
-                  <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                  <h3 className="font-medium text-[var(--neu-text)] truncate">{note.title}</h3>
+                  <p className="text-sm text-[var(--neu-text-muted)] mt-1 line-clamp-2">
                     {note.content || 'Tidak ada konten'}
                   </p>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-[var(--neu-text-muted)] mt-2">
                     {format(new Date(note.updated_at), 'dd/MM/yyyy HH:mm')}
                   </p>
                 </div>
@@ -155,9 +155,9 @@ export default function NotesPage() {
           </div>
         </div>
 
-        <div className="col-span-8 bg-white rounded-lg shadow border border-gray-200">
+        <div className="col-span-8 neu-card">
           {!selectedNote ? (
-            <div className="h-full flex items-center justify-center text-gray-500">
+            <div className="h-full flex items-center justify-center text-[var(--neu-text-muted)]">
               Pilih atau buat catatan baru
             </div>
           ) : (
@@ -168,24 +168,24 @@ export default function NotesPage() {
                     type="text"
                     value={editForm.title}
                     onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
-                    className="text-2xl font-bold mb-4 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="text-2xl font-bold mb-4 px-3 py-2 neu-input"
                   />
                   <textarea
                     value={editForm.content}
                     onChange={(e) => setEditForm({ ...editForm, content: e.target.value })}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="flex-1 px-3 py-2 neu-input"
                     placeholder="Tulis catatan Anda..."
                   />
                   <div className="flex gap-3 mt-4">
                     <button
                       onClick={updateNote}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                      className="px-4 py-2 neu-button"
                     >
                       Simpan
                     </button>
                     <button
                       onClick={() => setIsEditing(false)}
-                      className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                      className="px-4 py-2 neu-button-secondary"
                     >
                       Batal
                     </button>
@@ -193,23 +193,23 @@ export default function NotesPage() {
                 </div>
               ) : (
                 <>
-                  <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+                  <div className="p-6 flex items-center justify-between">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900">{selectedNote.title}</h2>
-                      <p className="text-sm text-gray-500 mt-1">
+                      <h2 className="text-2xl font-bold text-[var(--neu-text)]">{selectedNote.title}</h2>
+                      <p className="text-sm text-[var(--neu-text-muted)] mt-1">
                         Terakhir diubah: {format(new Date(selectedNote.updated_at), 'dd/MM/yyyy HH:mm')}
                       </p>
                     </div>
                     <div className="flex gap-2">
                       <button
                         onClick={() => setIsEditing(true)}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                        className="px-4 py-2 neu-button"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => deleteNote(selectedNote.id)}
-                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                        className="px-4 py-2 neu-button-danger"
                       >
                         Hapus
                       </button>
@@ -217,7 +217,7 @@ export default function NotesPage() {
                   </div>
                   <div className="flex-1 p-6 overflow-y-auto">
                     <div className="prose max-w-none">
-                      <p className="whitespace-pre-wrap text-gray-700">
+                      <p className="whitespace-pre-wrap text-[var(--neu-text)]">
                         {selectedNote.content || 'Tidak ada konten'}
                       </p>
                     </div>
