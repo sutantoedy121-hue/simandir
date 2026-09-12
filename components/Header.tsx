@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 
 const navigation = [
+  { name: 'AI', href: '/dashboard/ai', icon: MessageSquareIcon },
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboardIcon },
   { name: 'Waktu', href: '/dashboard/time', icon: CalendarIcon },
   { name: 'Tugas', href: '/dashboard/tasks', icon: CheckSquareIcon },
@@ -27,7 +28,6 @@ const navigation = [
   { name: 'Catatan', href: '/dashboard/notes', icon: BookOpenIcon },
   { name: 'Proyek', href: '/dashboard/projects', icon: FolderIcon },
   { name: 'Jurnal', href: '/dashboard/journal', icon: FileTextIcon },
-  { name: 'AI', href: '/dashboard/ai', icon: MessageSquareIcon },
 ]
 
 export default function Header({ email }: { email?: string }) {
