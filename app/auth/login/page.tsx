@@ -103,6 +103,15 @@ export default function LoginPage() {
             </div>
           </div>
 
+          <div className="flex justify-end">
+            <a
+              href="/auth/lupa-password"
+              className="text-sm font-medium text-[var(--neu-accent)] hover:text-[var(--neu-accent-hover)]"
+            >
+              Lupa password?
+            </a>
+          </div>
+
           <div>
             <button
               type="submit"

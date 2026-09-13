@@ -8,6 +8,10 @@ export type Database = {
           full_name: string | null
           avatar_url: string | null
           timezone: string
+          username: string | null
+          hobi: string | null
+          favorit: string | null
+          bio: string | null
           created_at: string
           updated_at: string
         }
@@ -17,6 +21,10 @@ export type Database = {
           full_name?: string | null
           avatar_url?: string | null
           timezone?: string
+          username?: string | null
+          hobi?: string | null
+          favorit?: string | null
+          bio?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -26,6 +34,10 @@ export type Database = {
           full_name?: string | null
           avatar_url?: string | null
           timezone?: string
+          username?: string | null
+          hobi?: string | null
+          favorit?: string | null
+          bio?: string | null
           created_at?: string
           updated_at?: string
         }

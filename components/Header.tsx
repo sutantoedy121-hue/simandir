@@ -18,11 +18,14 @@ import {
   LayoutDashboardIcon,
   MenuIcon,
   XIcon,
+  BarChart3Icon,
+  UserCircleIcon,
 } from 'lucide-react'
 
 const navigation = [
   { name: 'AI', href: '/dashboard/ai', icon: MessageSquareIcon },
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboardIcon },
+  { name: 'Evaluasi', href: '/dashboard/evaluasi', icon: BarChart3Icon },
   { name: 'Waktu', href: '/dashboard/time', icon: CalendarIcon },
   { name: 'Tugas', href: '/dashboard/tasks', icon: CheckSquareIcon },
   { name: 'Keuangan', href: '/dashboard/finance', icon: DollarSignIcon },
@@ -31,6 +34,7 @@ const navigation = [
   { name: 'Catatan', href: '/dashboard/notes', icon: BookOpenIcon },
   { name: 'Proyek', href: '/dashboard/projects', icon: FolderIcon },
   { name: 'Jurnal', href: '/dashboard/journal', icon: FileTextIcon },
+  { name: 'Profil', href: '/dashboard/profil', icon: UserCircleIcon },
 ]
 
 const FOKUS =
